@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +21,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('dashboard')->group(function () {
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::get('/me', 'DashboardController@me')->name('dashboard-me');
+    Route::put('/me', 'DashboardController@update')->name('dashboard-update-me');
+    Route::get('/orders', 'DashboardController@orders')->name('dashboard-my-orders');
+});

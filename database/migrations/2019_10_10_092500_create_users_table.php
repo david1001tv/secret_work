@@ -20,12 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('name')->nullable();
             $table->string('address')->nullable();
-            $table->unsignedBigInteger('country_id')->nullable();
-            $table->boolean('is_admin')->default(false);
-            $table->boolean('is_email_confirmed')->default(false);
+            $table->unsignedBigInteger('role_id')->default(false);
             $table->timestamps();
 
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 

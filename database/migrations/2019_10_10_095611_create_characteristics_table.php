@@ -15,12 +15,13 @@ class CreateCharacteristicsTable extends Migration
     {
         Schema::create('characteristics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('key', 100)->nullable(false);
+            $table->unsignedBigInteger('type_id');
             $table->string('value', 500)->nullable(false);
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('type_id')->references('id')->on('characteristics_types');
         });
     }
 
