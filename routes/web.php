@@ -30,8 +30,11 @@ Route::prefix('dashboard')->group(function () {
 });
 
 Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::get('/', 'Admin\ProductsController@createForm')->name('admin.panel');
+    Route::get('/', 'Admin\ProductsController@listView')->name('admin.panel');
 
-    Route::get('/product/create/form', 'Admin\ProductsController@createForm')->name('admin.products_form');
-    Route::post('/product/create/', 'Admin\ProductsController@create')->name('admin.products_create');
+    Route::get('/products', 'Admin\ProductsController@listView')->name('admin.products_list');
+    Route::get('/products/create/form', 'Admin\ProductsController@createForm')->name('admin.create_products_form');
+    Route::get('/products/update/form/{id}', 'Admin\ProductsController@updateForm')->name('admin.update_products_form');
+    Route::post('/products/create/', 'Admin\ProductsController@create')->name('admin.products_create');
+    Route::post('/products/update/', 'Admin\ProductsController@update')->name('admin.products_update');
 });

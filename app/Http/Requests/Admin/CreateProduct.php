@@ -25,8 +25,9 @@ class CreateProduct extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'cost' => 'required|float|min:1',
+            'cost' => 'required|numeric|min:1',
             'description' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'category' => 'required|integer|exists:product_categories,id',
             'characteristics' => 'required|array'
         ];

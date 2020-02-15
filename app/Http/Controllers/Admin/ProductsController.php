@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\CreateProduct as CreateProductRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Characteristic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,9 @@ class ProductsController extends Controller
     {
         $products = Product::all();
         //TODO: add return view with list of products
-        return true;
+        return view('admin.products_list', [
+            'products' => $products
+        ]);
     }
 
     public function createForm()
@@ -29,11 +32,29 @@ class ProductsController extends Controller
     public function create(CreateProductRequest $request)
     {
         $data = $request->validated();
+        $imageName = time().'.'.request()->image->getClientOriginalExtension();
 
         $product = Product::create([
-            'name' => $data['date'],
+            'name' => $data['name'],
             'category_id' => $data['category'],
+            'description' => $data['description'],
+            'image' => $imageName,
             'cost' => $data['cost']
+        ]);
+        request()->image->move(public_path('images'), $imageName);
+
+        foreach($data['characteristics'][$product->category_id] as $characteristic) {
+            Characteristic::create([
+                'product_id' => $product->id,
+                'type_id' => $product->category_id,
+                'value' => $characteristic
+            ]);
+        }
+
+        $products = Product::all();
+
+        return view('admin.products_list', [
+            'products' => $products
         ]);
     }
 
