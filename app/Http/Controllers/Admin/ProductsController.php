@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\CreateProduct as CreateProductRequest;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
@@ -18,13 +19,22 @@ class ProductsController extends Controller
 
     public function createForm()
     {
-        //TODO: add return view create form
-        return true;
+        $categories = ProductCategory::with(['types'])->get();
+
+        return view('admin/create_product', [
+            'categories' => $categories
+        ]);
     }
 
-    public function create(Request $request)
+    public function create(CreateProductRequest $request)
     {
-        $data = $request->post();
+        $data = $request->validated();
+
+        $product = Product::create([
+            'name' => $data['date'],
+            'category_id' => $data['category'],
+            'cost' => $data['cost']
+        ]);
     }
 
     public function updateForm($id)

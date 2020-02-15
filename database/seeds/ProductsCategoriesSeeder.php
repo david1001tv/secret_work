@@ -11,7 +11,7 @@ class ProductsCategoriesSeeder extends Seeder
      */
     public function run()
     {
-        $categories = ['Laptops & Netbooks', 'Desktops', 'Printers', 'Tablets', 'Monitors'];
+        $categories = ['Laptops & Netbooks', 'Desktops', 'Printers', 'Monitors'];
 
         foreach ($categories as $category) {
             \App\Models\ProductCategory::create([

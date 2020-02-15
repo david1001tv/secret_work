@@ -28,3 +28,10 @@ Route::prefix('dashboard')->group(function () {
     Route::put('/me', 'DashboardController@update')->name('dashboard-update-me');
     Route::get('/orders', 'DashboardController@orders')->name('dashboard-my-orders');
 });
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/', 'Admin\ProductsController@createForm')->name('admin.panel');
+
+    Route::get('/product/create/form', 'Admin\ProductsController@createForm')->name('admin.products_form');
+    Route::post('/product/create/', 'Admin\ProductsController@create')->name('admin.products_create');
+});

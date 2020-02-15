@@ -17,6 +17,6 @@ class ProductCategory extends Model
 
     public function types()
     {
-        return $this->hasMany(CharacteristicType::class);
+        return $this->hasMany(CharacteristicType::class, 'category_id');
     }
 }
