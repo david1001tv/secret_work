@@ -6,7 +6,6 @@ use App\Http\Requests\Admin\CreateUser as CreateUserRequest;
 use App\Http\Requests\Admin\UpdateUser as UpdateUserRequest;
 use App\Models\User;
 use App\Models\Role;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 
@@ -40,8 +39,11 @@ class UsersController extends Controller
             'phone' => $data['email'],
             'name' => $data['name'],
             'address' => $data['address'],
-            'role_id' => $data['role']
+            'role_id' => $data['role'],
+            'password' => $password
         ]);
+
+        //TODO send mail with password
 
         return redirect('admin/users');
     }
@@ -49,7 +51,7 @@ class UsersController extends Controller
     public function updateForm($id)
     {
         $user = User::findOrFail($id);
-        
+
         return view('admin.update_user', [
             'user' => $user
         ]);
@@ -58,30 +60,15 @@ class UsersController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $data = $request->validated();
-        $product = Product::findOrFail($id);
-        
-        if (!empty($request->image)) {
-            $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        } else {
-            $imageName = null;
-        }
-        
-        $product->update([
-            'name' => $data['name'] ?? $product->name,
-            'description' => $data['description'] ?? $product->description,
-            'image' => $imageName ?? $product->image,
-            'cost' => $data['cost'] ?? $product->cost
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'phone' => $data['email'],
+            'name' => $data['name'],
+            'address' => $data['address'],
+            'role_id' => $data['role']
         ]);
 
-        foreach($data['characteristics'][$product->category_id] as $characteristic) {
-            Characteristic::where([
-                'product_id' => $product->id,
-                'type_id' => $product->category_id,
-            ])->update([
-                'value' => $characteristic
-            ]);
-        }
-
-        return redirect('admin/products/update/form/' . $id);
+        return redirect('admin/users/update/form/' . $id);
     }
 }

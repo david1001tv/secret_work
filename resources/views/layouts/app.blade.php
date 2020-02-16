@@ -54,7 +54,7 @@
                                 </li>
                             @endif
                         @else
-                            @if (Auth::user()->role->name === 'admin')
+                            @if (Auth::user()->role->name !== 'client')
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.panel') }}">Admin panel</a>
                                 </li>

@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\UpdateProduct as UpdateProductRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Characteristic;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ProductsController extends Controller
@@ -58,7 +57,7 @@ class ProductsController extends Controller
     public function updateForm($id)
     {
         $product = Product::findOrFail($id);
-        
+
         return view('admin.update_product', [
             'product' => $product
         ]);
@@ -68,13 +67,13 @@ class ProductsController extends Controller
     {
         $data = $request->validated();
         $product = Product::findOrFail($id);
-        
+
         if (!empty($request->image)) {
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
         } else {
             $imageName = null;
         }
-        
+
         $product->update([
             'name' => $data['name'] ?? $product->name,
             'description' => $data['description'] ?? $product->description,
