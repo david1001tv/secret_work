@@ -1,5 +1,5 @@
-@extends('layouts.app')
-
+@extends('layouts.app', ['isSearch' => false])
+@section('title', $product->name)
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

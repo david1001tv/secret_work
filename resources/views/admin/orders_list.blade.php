@@ -1,8 +1,7 @@
-@extends('layouts.app')
-
+@extends('layouts.app', ['isSearch' => false])
+@section('title', 'Orders')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-sm-between">
+    <div class="container center p-40">
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -27,6 +26,5 @@
                 @endforeach
                 </tbody>
             </table>
-        </div>
     </div>
 @endsection

@@ -1,7 +1,7 @@
-@extends('layouts.app')
-
+@extends('layouts.app', ['isSearch' => false])
+@section('title', 'Users')
 @section('content')
-    <div class="container">
+    <div class="container center p-40">
         <div class="row justify-content-sm-between">
             <table class="table table-bordered">
                 <thead>

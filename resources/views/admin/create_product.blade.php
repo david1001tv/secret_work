@@ -1,7 +1,7 @@
-@extends('layouts.app')
-
+@extends('layouts.app', ['isSearch' => false])
+@section('title', 'New product')
 @section('content')
-    <div class="container">
+    <div class="container center p-40">
         <div class="row justify-content-center">
             <div class="col-md-8">
             @if (count($errors) > 0)
@@ -16,7 +16,7 @@
             @endif
             </div>
             <div class="col-md-8">
-                <form method="POST" action="{{ route('admin.products_create') }}" enctype="multipart/form-data">
+                <form method="POST" class="p-b-20" action="{{ route('admin.products_create') }}" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputName">Name</label>

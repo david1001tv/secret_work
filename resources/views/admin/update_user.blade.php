@@ -1,10 +1,10 @@
-@extends('layouts.app')
-
+@extends('layouts.app', ['isSearch' => false])
+@section('title', $user->name)
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+    <div class="container center p-40">
+
                 @if (count($errors) > 0)
+                <div class="col-md-8">
                     <div class="alert alert-danger">
                         <strong>Whoops!</strong> There were some problems with your input.
                         <ul>
@@ -13,8 +13,8 @@
                             @endforeach
                         </ul>
                     </div>
+                </div>
                 @endif
-            </div>
             <div class="col-md-8">
                 <form method="POST" action="{{ route('admin.users_update', ['id' => $user->id]) }}">
                     <div class="form-row">
@@ -51,6 +51,5 @@
                        aria-pressed="true">Cancel</a>
                 </form>
             </div>
-        </div>
     </div>
 @endsection

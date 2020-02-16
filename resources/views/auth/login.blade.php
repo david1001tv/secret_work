@@ -1,5 +1,5 @@
-@extends('layouts.app')
-
+@extends('layouts.app', ['isSearch' => false])
+@section('title', 'Login')
 @section('content')
 <div class="container center p-40">
         <div class="col-md-6">

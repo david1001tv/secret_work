@@ -707,13 +707,12 @@ main.main-admin .container .links a .admin-link .count-el {
 .wrapped-items .products .product-item {
     border: 1px solid;
     margin-bottom: 20px;
-    text-align: center;
     width: 250px;
 }
 
 .wrapped-items .products .product-item img.product-img {
     border-bottom: 1px solid black;
-    height: 200px;
+    width: 100%;
 }
 
 .wrapped-items .products .product-item .footer-product {
@@ -911,4 +910,12 @@ main.main-admin .container .links a .admin-link .count-el {
 
 .p-40{
     padding-top: 40px;
+}
+
+.end{
+    justify-content: flex-end;
+}
+
+.p-b-20{
+    padding-bottom: 20px;
 }

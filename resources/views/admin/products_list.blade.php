@@ -1,7 +1,13 @@
-@extends('layouts.app')
-
+@extends('layouts.app', ['isSearch' => false])
+@section('title', 'Products')
 @section('content')
-    <div class="container">
+
+    <div class="container end p-40">
+        <a href="{{ route('admin.create_products_form') }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create product</a>
+
+    </div>
+    <div class="container center p-40">
+
         <div class="row justify-content-sm-between">
             <table class="table table-bordered">
                 <thead>
@@ -25,8 +31,6 @@
                 @endforeach
                 </tbody>
             </table>
-
-            <a href="{{ route('admin.create_products_form') }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create product</a>
         </div>
     </div>
 @endsection

@@ -92,15 +92,17 @@
                     <a href="{{ route('home') }}">PCShop</a>
                 </div>
             </div>
-            <div class="search-panel">
-                <form action="">
-                    <div class="search">
-                        <img src="{{ asset('images/search.png') }}" alt="search">
-                        <input type="text" name="search-request" required>
-                        <input type="submit" value="Search">
+                @if ($isSearch)
+                    <div class="search-panel">
+                        <form action="">
+                            <div class="search">
+                                <img src="{{ asset('images/search.png') }}" alt="search">
+                                <input type="text" name="search-request" required>
+                                <input type="submit" value="Search">
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </div>
+                @endif
             <div class="user-panel">
                 <div class="user-menu">
                     @if (Auth::check())

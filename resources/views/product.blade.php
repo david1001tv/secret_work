@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['isSearch' => true])
 
 @section('title', $products->name)
 

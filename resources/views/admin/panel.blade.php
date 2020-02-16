@@ -1,8 +1,7 @@
-@extends('layouts.app')
-
+@extends('layouts.app', ['isSearch' => false])
+@section('title', 'Admin panel')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-sm-between">
+    <div class="container center p-40 justify-content-around">
             <div class="card" style="width: 18rem;">
                 <div class="card-header">Orders</div>
                 <div class="card-body">
@@ -27,6 +26,5 @@
                     <a href="{{ route('admin.products_list') }}" class="btn btn-primary">Go to products list</a>
                 </div>
             </div>
-        </div>
     </div>
 @endsection

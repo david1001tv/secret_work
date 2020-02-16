@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['isSearch' => true])
 
 @section('title', 'Index')
 
@@ -33,7 +33,7 @@
                         <div class="footer-product">
                             <div class="wrapped-product">
                                 <div class="title d-inline-block text-truncate" style="max-width: 200px;">
-                                    {{ $product->description }}
+                                    {{ $product->name }}
                                 </div>
                                 <div class="price">
                                     ${{ $product->cost }}
