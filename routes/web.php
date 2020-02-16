@@ -20,6 +20,9 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home/show', 'HomeController@show')->name('home.show');
 Route::get('/product/show/{id}', 'HomeController@showProduct')->name('product.show');
 
+Route::get('/checkout', 'CheckoutController@form')->name('make_order_form')->middleware('auth');
+Route::post('/checkout', 'CheckoutController@makeOrder')->name('make_order')->middleware('auth');
+
 Route::prefix('dashboard')->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::get('/me', 'DashboardController@me')->name('dashboard-me');
@@ -27,7 +30,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/orders', 'DashboardController@orders')->name('dashboard-my-orders');
 });
 
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', 'Admin\HomeController@index')->name('admin.panel');
 
     Route::prefix('products')->group(function () {
