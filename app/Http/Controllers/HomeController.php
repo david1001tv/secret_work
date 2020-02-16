@@ -3,32 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('index');
-    }
-
     public function show(Request $request)
     {
         $category = $request->input('category');
+        $categories = ProductCategory::all();
 
         if (empty($category)) {
-            return abort(404);
+            $products = Product::all();
+        } else {
+            $products = Product::where('category_id', $category)->get();
         }
 
-        $products = Product::where('category_id', $category)->get();
-
-        return view('products_list', [
-            'products' => $products
+        return view('index', [
+            'products' => $products,
+            'categories' => $categories
         ]);
     }
 

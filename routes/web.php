@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/home/show', 'HomeController@show')->name('home.show');
-Route::get('/product/show/{id}', 'HomeController@showProduct')->name('product.show');
+Route::get('/', 'HomeController@show')->name('home');
+Route::get('/product/{id}', 'HomeController@showProduct')->name('product.show');
 
 Route::get('/checkout', 'CheckoutController@form')->name('make_order_form')->middleware('auth');
 Route::post('/checkout', 'CheckoutController@makeOrder')->name('make_order')->middleware('auth');
