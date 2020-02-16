@@ -17,40 +17,47 @@
             </div>
             <div class="col-md-8">
                 <form method="POST" action="{{ route('admin.products_create') }}" enctype="multipart/form-data">
-                    <label for="name">Name:</label><br>
-                    <input type="text" id="name" name="name" required><br>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputName">Name</label>
+                            <input type="text" class="form-control" id="inputName" name="name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputCost">Cost</label>
+                            <input type="number" class="form-control" id="inputCost" name="cost">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputImage">Image</label>
+                        <input type="file" class="form-control-file" id="inputImage" name="image">
+                    </div>
 
-                    <label for="cost">Cost:</label><br>
-                    <input type="number" id="cost" name="cost" required><br>
-
-                    <label for="description">Description:</label><br>
-                    <input type="text" id="description" name="description" required><br>
-
-                    <label for="iamge">Image:</label><br>
-                    <input type="file" id="image" name="image"><br>
-
-                    <label for="category">Category:</label><br>
-                    <select id="category" name="category">
+                    <div class="form-group">
+                        <label for="inputDescription">Description</label>
+                        <textarea class="form-control" id="inputDescription" name="description" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCategory">Category</label>
+                        <select id="inputCategory" class="form-control" name="category">
+                            @foreach($categories as $category)
+                                <option id="{{$category->id}}" value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-row">
                         @foreach($categories as $category)
-                            <option id="{{$category->id}}" value="{{ $category->id }}">{{ $category->name }}</option>
+                            @foreach($category['types'] as $categoryType)
+                                <div class="form-group col-md-6 category-{{ $category->id }}">
+                                    <label for="{{ $categoryType->name }}">{{ $categoryType->name }}:</label>
+                                    <input id="{{ $categoryType->name }}" class="form-control category-{{ $category->id }}"
+                                           type="text" name="characteristics[{{ $category->id }}][]" required
+                                    >
+                                </div>
+                            @endforeach
                         @endforeach
-                    </select>
-                    <br>
-
-                    @foreach($categories as $category)
-                        @foreach($category['types'] as $categoryType)
-                            <label for="{{ $categoryType->name }}" class="category-{{ $category->id }}">{{ $categoryType->name }}:</label><br class="category-{{ $category->id }}">
-                            <input id="{{ $categoryType->name }}"
-                                   class="category-{{ $category->id }}"
-                                   type="text"
-                                   name="characteristics[{{ $category->id }}][]"
-                                   required
-                            >
-                            <br class="category-{{ $category->id }}">
-                        @endforeach
-                    @endforeach
-
-                    <input type="submit" value="Submit">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <a href="{{ route('admin.products_list') }}" class="btn btn-secondary active" role="button" aria-pressed="true">Cancel</a>
                 </form>
             </div>
         </div>
@@ -58,8 +65,8 @@
 
     <script>
         $(document).ready(() => {
-            const children = document.getElementById('category').children;
-            const selected = document.getElementById('category').value;
+            const children = document.getElementById('inputCategory').children;
+            const selected = document.getElementById('inputCategory').value;
 
             for (let i=0, child; child = children[i]; i++) {
                 if (child.value !== selected) {
@@ -68,7 +75,7 @@
                 }
             }
 
-            document.getElementById('category').addEventListener("change", (e) => {
+            document.getElementById('inputCategory').addEventListener("change", (e) => {
                 const options = e.target.children;
                 const selected = e.target.value;
 

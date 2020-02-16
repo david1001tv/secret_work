@@ -18,7 +18,7 @@ class HomeController extends Controller
         return view('admin.panel', [
             'ordersCount' => $ordersCount,
             'usersCount' => $usersCount,
-            'productsOrder' => $productsCount
+            'productsCount' => $productsCount
         ]);
     }
 }
