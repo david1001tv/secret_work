@@ -410,12 +410,14 @@ footer.footer {
     height: 70px;
 }
 
-footer.footer .site-logo p {
+footer.footer .site-logo p, .site-logo a {
     font-family: VT323;
     font-style: normal;
     font-weight: normal;
     font-size: 50px;
     line-height: 50px;
+    text-decoration: none;
+    color: black;
 }
 
 footer.footer .copyright {
@@ -704,10 +706,13 @@ main.main-admin .container .links a .admin-link .count-el {
 .wrapped-items .products .product-item {
     border: 1px solid;
     margin-bottom: 20px;
+    text-align: center;
+    width: 250px;
 }
 
 .wrapped-items .products .product-item img.product-img {
     border-bottom: 1px solid black;
+    height: 200px;
 }
 
 .wrapped-items .products .product-item .footer-product {

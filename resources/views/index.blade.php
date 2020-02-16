@@ -4,8 +4,6 @@
 
 @section('content')
 
-
-
 <div class="container">
     <!-- <div class="slider">
         <img src="assets/img/1.jpg" alt="1" class="u-img">
@@ -18,74 +16,40 @@
                 <p>Filter by</p>
             </div>
             <ul>
-                <li>
-                    <a href="#">Category name</a>
-                </li>
-                <li>
-                    <a href="#">Category name</a>
-                </li>
-                <li>
-                    <a href="#">Category name</a>
-                </li>
+                @foreach($categories as $category)
+                    <li>
+                        <a href="{{ route('home') . '?category=' . $category->id }}">{{ $category->name }}</a>
+                    </li>
+                @endforeach
             </ul>
         </div>
         <div class="products">
-            <div class="product-item">
-                <a href="">
-                    <img src="{{ asset('images/default.png') }}" alt="product-img" class="product-img">
-                </a>
-               <div class="footer-product">
-                    <div class="wrapped-product">
-                        <div class="title">
-                            Lorem ipsum dolor sit amet
-                        </div>
-                        <div class="price">
-                            $12.90
-                        </div>
-                    </div>
-                    <div class="buy-btn">
-                        <img src="{{ asset('images/buy.png') }}" alt="buy" class="img-buy">
-                    </div>
-               </div>
-            </div>
-
-            <div class="product-item">
-                <a href="">
-                    <img src="{{ asset('images/default.png') }}" alt="product-img" class="product-img">
-                </a>
-               <div class="footer-product">
-                    <div class="wrapped-product">
-                        <div class="title">
-                            Lorem ipsum dolor sit amet
-                        </div>
-                        <div class="price">
-                            $12.90
+            @if (count($products))
+                @foreach($products as $product)
+                    <div class="product-item">
+                        <a href="{{ route('product.show', ['id' => $product->id]) }}">
+                            <img src="{{ asset('images/' . $product->image) }}" alt="product-img" class="product-img">
+                        </a>
+                        <div class="footer-product">
+                            <div class="wrapped-product">
+                                <div class="title d-inline-block text-truncate" style="max-width: 200px;">
+                                    {{ $product->description }}
+                                </div>
+                                <div class="price">
+                                    ${{ $product->cost }}
+                                </div>
+                            </div>
+                            <div class="buy-btn">
+                                <img src="{{ asset('images/buy.png') }}" alt="buy" class="img-buy">
+                            </div>
                         </div>
                     </div>
-                    <div class="buy-btn">
-                        <img src="{{ asset('images/buy.png') }}" alt="buy" class="img-buy">
-                    </div>
-               </div>
-            </div>
-
-            <div class="product-item">
-                <a href="">
-                    <img src="{{ asset('images/default.png') }}" alt="product-img" class="product-img">
-                </a>
-               <div class="footer-product">
-                    <div class="wrapped-product">
-                        <div class="title">
-                            Lorem ipsum dolor sit amet
-                        </div>
-                        <div class="price">
-                            $12.90
-                        </div>
-                    </div>
-                    <div class="buy-btn">
-                        <img src="{{ asset('images/buy.png') }}" alt="buy" class="img-buy">
-                    </div>
-               </div>
-            </div>
+                @endforeach
+            @else
+                <div>
+                    Empty
+                </div>
+            @endif
         </div>
     </div>
 </div>

@@ -87,7 +87,10 @@
     <header class="header">
         <div class="container-menu">
             <div class="btn-menu">
-                <img src="{{ asset('images/menu.png') }}" alt="menu">
+{{--                <img src="{{ asset('images/menu.png') }}" alt="menu">--}}
+                <div class="site-logo">
+                    <a href="{{ route('home') }}">PCShop</a>
+                </div>
             </div>
             <div class="search-panel">
                 <form action="">
