@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Order;
 
 class User extends Authenticatable
 {
@@ -30,5 +31,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function orders(){
+       return Order::where('user_id', '=', $this->id)
+                    ->with('status', 'product');
     }
 }

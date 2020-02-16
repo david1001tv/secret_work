@@ -21,9 +21,12 @@ class DashboardController extends Controller
     public function me()
     {
         $user = Auth::user();
+        $orders = $user->orders()->get();
 
-        //TODO: return view with prepared data
-        return view('account', ['user' => $user]);
+        return view('account', [
+            'user' => $user,
+            'orders' => $orders
+        ]);
     }
 
     //TODO: make update my data request
@@ -41,12 +44,12 @@ class DashboardController extends Controller
         return redirect('dashboard/me');
     }
 
-    public function orders()
-    {
-        $user = Auth::user();
-        $userOrders = $user->orders()->get();
+    // public function orders()
+    // {
+    //     $user = Auth::user();
+    //     $userOrders = $user->orders()->get();
 
-        //TODO: return view with prepared data
-        return $userOrders;
-    }
+    //     //TODO: return view with prepared data
+    //     return $userOrders;
+    // }
 }
