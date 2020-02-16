@@ -48,7 +48,3 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('/update', 'Admin\UsersController@update')->name('admin.users_update');
     });
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
