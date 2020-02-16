@@ -912,10 +912,27 @@ main.main-admin .container .links a .admin-link .count-el {
     padding-top: 40px;
 }
 
+
 .end{
     justify-content: flex-end;
 }
 
 .p-b-20{
     padding-bottom: 20px;
+}
+#cartCount {
+    color: white;
+    background-color: red;
+    border-radius: 10px;
+    font-size: 11px;
+    height: 20px;
+    width: 20px;
+    position: relative;
+    top: -40px;
+    right: -25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-stretch: ultra-condensed;
 }

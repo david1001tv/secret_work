@@ -130,6 +130,9 @@
                    <a href="{{ route('make_order_form') }}">
                     <img src="{{ asset('images/shopping-cart.png') }}" alt="cart">
                    </a>
+                    @if (Auth::check())
+                        <span id="cartCount">{{ $cartCount ?? 0 }}</span>
+                    @endif
                 </div>
             </div>
         </div>
