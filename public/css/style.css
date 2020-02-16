@@ -873,3 +873,42 @@ main.main-admin .container .links a .admin-link .count-el {
     line-height: 19px;
     padding-bottom: 10px;
 }
+
+.user-no-login {
+    position: absolute;
+    top: 45px;
+    background-color: white;
+    padding: 7px;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+}
+
+.user-menu a, .exit {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: black;
+    margin: 0 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.user-menu a:hover, .exit:hover {
+    color: #1F61B8;
+}
+
+.user-menu a:first-child {
+    margin-left: 0;
+}
+
+.center{
+    justify-content: center;
+}
+
+.p-40{
+    padding-top: 40px;
+}

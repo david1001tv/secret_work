@@ -104,32 +104,24 @@
             <div class="user-panel">
                 <div class="user-menu">
                     @if (Auth::check())
-                        <div class="user-menu">
-                            <img src="{{ asset('images/user.png') }}" alt="user">
-                            <div class="user-no-login">
-                                <ul>
-                                    <li><a href="{{ route('dashboard-me') }}">
-                                        Account
-                                    </a></li>
-                                    <li class="btn-logout"
-                                    onclick="event.preventDefault();
+                                @if (Auth::user()->role->name !== 'client')
+                                    <a href="{{ route('admin.panel') }}">Admin panel</a>
+                                @endif
+                                <a href="">
+                                    Account
+                                </a>
+                                <div class="exit"
+                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
-                                    >Logout</li>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </ul>
-                            </div>
-
-                        </div>
+                                >
+                                    Logout
+                                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                     @else
-                        <img src="{{ asset('images/user.png') }}" alt="user">
-                        <div class="user-no-login">
-                            <ul>
-                                <li>Login</li>
-                                <li>Register</li>
-                            </ul>
-                        </div>
+                        <a href="/login">Login</a>
+                        <a href="/register">Register</a>
                     @endif
                 </div>
                 <div class="cart">
