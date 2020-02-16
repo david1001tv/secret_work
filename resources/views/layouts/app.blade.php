@@ -100,10 +100,39 @@
             </div>
             <div class="user-panel">
                 <div class="user-menu">
-                    <img src="{{ asset('images/user.png') }}" alt="user">
+                    @if (Auth::check())
+                        <div class="user-menu">
+                            <img src="{{ asset('images/user.png') }}" alt="user">
+                            <div class="user-no-login">
+                                <ul>
+                                    <li><a href="{{ route('dashboard-me') }}">
+                                        Account
+                                    </a></li>
+                                    <li class="btn-logout"
+                                    onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                                    >Logout</li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </ul>
+                            </div>
+
+                        </div>
+                    @else
+                        <img src="{{ asset('images/user.png') }}" alt="user">
+                        <div class="user-no-login">
+                            <ul>
+                                <li>Login</li>
+                                <li>Register</li>
+                            </ul>
+                        </div>
+                    @endif
                 </div>
                 <div class="cart">
+                   <a href="{{ route('make_order_form') }}">
                     <img src="{{ asset('images/shopping-cart.png') }}" alt="cart">
+                   </a>
                 </div>
             </div>
         </div>
