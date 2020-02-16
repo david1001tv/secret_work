@@ -36,6 +36,7 @@ footer, header, hgroup, menu, nav, section {
 
 body {
     line-height: 1;
+    font-family: Roboto;
 }
 
 ol, ul {
@@ -935,4 +936,8 @@ main.main-admin .container .links a .admin-link .count-el {
     justify-content: center;
     font-weight: 600;
     font-stretch: ultra-condensed;
+}
+
+form.form-user {
+    width: 400px;
 }

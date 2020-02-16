@@ -109,7 +109,7 @@
                                 @if (Auth::user()->role->name !== 'client')
                                     <a href="{{ route('admin.panel') }}">Admin panel</a>
                                 @endif
-                                <a href="">
+                                <a href="{{ route('dashboard-me') }}">
                                     Account
                                 </a>
                                 <div class="exit"

@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         //TODO: return view with prepared data
-        return $user;
+        return view('account', ['user' => $user]);
     }
 
     //TODO: make update my data request
