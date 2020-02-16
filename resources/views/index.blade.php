@@ -1,6 +1,6 @@
 @extends('layouts.app', ['isSearch' => true])
 
-@section('title', 'Index')
+@section('title', 'PCShop')
 
 @section('content')
 
