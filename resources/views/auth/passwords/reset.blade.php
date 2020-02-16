@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['isSearch' => false])
 
 @section('content')
 <div class="container">
