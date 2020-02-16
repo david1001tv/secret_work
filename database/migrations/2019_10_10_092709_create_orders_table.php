@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('product_id');
             $table->decimal('cost', 16, 2)->default(0);
+            $table->integer('count')->default(1);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
