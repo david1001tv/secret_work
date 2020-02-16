@@ -14,13 +14,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home/show', 'HomeController@show')->name('home.show');
+Route::get('/product/show/{id}', 'HomeController@showProduct')->name('product.show');
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
@@ -35,16 +33,16 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::prefix('products')->group(function () {
         Route::get('/', 'Admin\ProductsController@listView')->name('admin.products_list');
         Route::get('/create/form', 'Admin\ProductsController@createForm')->name('admin.create_products_form');
-        Route::get('/update/form/{id}', 'Admin\ProductsController@updateForm')->name('admin.update_products_form');
         Route::post('/create', 'Admin\ProductsController@create')->name('admin.products_create');
+        Route::get('/update/form/{id}', 'Admin\ProductsController@updateForm')->name('admin.update_products_form');
         Route::post('/update/{id}', 'Admin\ProductsController@update')->name('admin.products_update');
     });
 
     Route::prefix('users')->group(function () {
         Route::get('/', 'Admin\UsersController@listView')->name('admin.users_list');
 //        Route::get('/create/form', 'Admin\UsersController@createForm')->name('admin.create_users_form');
-        Route::get('/update/form/{id}', 'Admin\UsersController@updateForm')->name('admin.update_users_form');
 //        Route::post('/create', 'Admin\UsersController@create')->name('admin.users_create');
+        Route::get('/update/form/{id}', 'Admin\UsersController@updateForm')->name('admin.update_users_form');
         Route::post('/update/{id}', 'Admin\UsersController@update')->name('admin.users_update');
     });
 
