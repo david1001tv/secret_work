@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,14 +18,16 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="app">
+    {{-- <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -80,11 +82,61 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    <header class="header">
+        <div class="container-menu">
+            <div class="btn-menu">
+                <img src="{{ asset('images/menu.png') }}" alt="menu">
+            </div>
+            <div class="search-panel">
+                <form action="">
+                    <div class="search">
+                        <img src="{{ asset('images/search.png') }}" alt="search">
+                        <input type="text" name="search-request" required>
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+            </div>
+            <div class="user-panel">
+                <div class="user-menu">
+                    <img src="{{ asset('images/user.png') }}" alt="user">
+                </div>
+                <div class="cart">
+                    <img src="{{ asset('images/shopping-cart.png') }}" alt="cart">
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="main">
+        @yield('content')
+    </main>
+
+    <footer class="footer">
+        <div class="container-menu">
+            <div class="site-logo">
+                <p>pcshop</p>
+            </div>
+            <div class="copyright">
+                © 2020 - Ecommerce software
+            </div>
+            <div class="social-links">
+                <div class="soc-item">
+                    <a href="#">
+                        <img src="{{ asset('images/doge.png') }}" alt="doge">
+                    </a>
+                    <a href="#">
+                        <img src="{{ asset('images/twitter.png') }}" alt="twitter">
+                    </a>
+                    <a href="#">
+                        <img src="{{ asset('images/facebook.png') }}" alt="facebook">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
