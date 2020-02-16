@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 
@@ -10,10 +11,14 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // $orders = Order::all();
+        $ordersCount = Order::count();
+        $usersCount = User::count();
+        $productsCount = Product::count();
 
-        // return view('admin.panel', [
-        //     'orders' => $orders
-        // ]);
+        return view('admin.panel', [
+            'ordersCount' => $ordersCount,
+            'usersCount' => $usersCount,
+            'productsOrder' => $productsCount
+        ]);
     }
 }
