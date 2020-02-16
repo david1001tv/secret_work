@@ -107,6 +107,7 @@
                 </div>
                 <div class="cart">
                     <img src="{{ asset('images/shopping-cart.png') }}" alt="cart">
+                    <span id="cartCount">{{ $cartCount }}</span>
                 </div>
             </div>
         </div>

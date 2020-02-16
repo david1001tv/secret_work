@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -19,9 +21,15 @@ class HomeController extends Controller
             $products = Product::where('category_id', $category)->get();
         }
 
+        $user = Auth::user();
+        if ($user) {
+            $currentCart = Cache::get('user_cart_' . $user->id);
+        }
+
         return view('index', [
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
+            'cartCount' => isset($currentCart) ? count($currentCart) : 0
         ]);
     }
 

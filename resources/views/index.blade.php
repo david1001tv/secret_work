@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="buy-btn">
-                                <a href="{{ route('add_to_cart', ['product_id' => $product->id]) }}"><img src="{{ asset('images/buy.png') }}" alt="buy" class="img-buy"></a>
+                                <a class="add-to-cart" href="#" data-product-id="{{ $product->id }}"><img src="{{ asset('images/buy.png') }}" alt="buy" class="img-buy"></a>
                             </div>
                         </div>
                     </div>
@@ -53,5 +53,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(() => {
+        $('.add-to-cart').click((e) => {
+            e.preventDefault();
+            const productId = e.currentTarget.dataset.productId;
+
+            $.get(`/add-to-cart?product_id=${productId}`, function(data, status) {
+                if (status === 'success') {
+                    $('#cartCount').text(data.length);
+                }
+            });
+        });
+    });
+</script>
 
 @endsection
