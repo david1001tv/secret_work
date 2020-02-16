@@ -57,6 +57,7 @@ class ProductsController extends Controller
     public function updateForm($id)
     {
         $product = Product::findOrFail($id);
+        $product->load('characteristics');
 
         return view('admin.update_product', [
             'product' => $product
@@ -70,6 +71,7 @@ class ProductsController extends Controller
 
         if (!empty($request->image)) {
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('images'), $imageName);
         } else {
             $imageName = null;
         }
@@ -81,7 +83,7 @@ class ProductsController extends Controller
             'cost' => $data['cost'] ?? $product->cost
         ]);
 
-        foreach($data['characteristics'][$product->category_id] as $characteristic) {
+        foreach($data['characteristics'] as $characteristic) {
             Characteristic::where([
                 'product_id' => $product->id,
                 'type_id' => $product->category_id,

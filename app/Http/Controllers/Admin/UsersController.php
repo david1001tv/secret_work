@@ -51,9 +51,11 @@ class UsersController extends Controller
     public function updateForm($id)
     {
         $user = User::findOrFail($id);
+        $roles = Role::all();
 
         return view('admin.update_user', [
-            'user' => $user
+            'user' => $user,
+            'roles' => $roles
         ]);
     }
 
@@ -63,7 +65,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 
         $user->update([
-            'phone' => $data['email'],
+            'phone' => $data['phone'],
             'name' => $data['name'],
             'address' => $data['address'],
             'role_id' => $data['role']
