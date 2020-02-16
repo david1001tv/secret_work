@@ -52,7 +52,7 @@ class ProductsController extends Controller
             ]);
         }
 
-        return redirect('admin/products');;
+        return redirect('admin/products');
     }
 
     public function updateForm($id)
@@ -90,5 +90,7 @@ class ProductsController extends Controller
                 'value' => $characteristic
             ]);
         }
+
+        return redirect('admin/products/update/form/' . $id);
     }
 }

@@ -39,4 +39,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('/create', 'Admin\ProductsController@create')->name('admin.products_create');
         Route::post('/update', 'Admin\ProductsController@update')->name('admin.products_update');
     });
+
+    Route::prefix('users')->group(function () {
+        Route::get('/', 'Admin\UsersController@listView')->name('admin.users_list');
+        Route::get('/create/form', 'Admin\UsersController@createForm')->name('admin.create_users_form');
+        Route::get('/update/form/{id}', 'Admin\UsersController@updateForm')->name('admin.update_users_form');
+        Route::post('/create', 'Admin\UsersController@create')->name('admin.users_create');
+        Route::post('/update', 'Admin\UsersController@update')->name('admin.users_update');
+    });
 });
