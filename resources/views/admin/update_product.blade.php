@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label for="currentImage">Current image</label><br>
-                        <img id="currentImage" src="{{ env('APP_URL') . '/images/' . $product->image }}"
+                        <img id="currentImage" src="{{ asset('/images/' . $product->image) }}"
                              style="height: 200px;">
                     </div>
                     <div class="form-group">

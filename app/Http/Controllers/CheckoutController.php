@@ -7,21 +7,59 @@ use App\Models\Product;
 use App\Http\Requests\Checkout as CheckoutRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class CheckoutController extends Controller
 {
+    public function addToCart(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $count = $request->input('count');
+        $user = Auth::user();
+
+        if (!empty($productId)) {
+            $currentCart = Cache::get('user_cart_' . $user->id);
+
+             if (empty($currentCart)) {
+                 $currentCart = [
+                     [
+                         'count' => $count ?? 1,
+                         'product_id' => (int)$productId
+                     ]
+                 ];
+
+                 Cache::forever('user_cart_' . $user->id, $currentCart);
+             } else {
+                 $currentCart[] = [
+                     'count' => $count ?? 1,
+                     'product_id' => (int)$productId
+                 ];
+
+                 Cache::forget('user_cart_' . $user->id);
+                 Cache::forever('user_cart_' . $user->id, $currentCart);
+             }
+
+            return $currentCart;
+        } else {
+            return abort(400);
+        }
+    }
+
     public function form(Request $request)
     {
-        $productId = $request->input('productId');
+        $user = Auth::user();
+        $currentCart = Cache::get('user_cart_' . $user->id, []) ;
+        $products = [];
 
-        if (empty($productId)) {
-            return abort(404);
+        foreach ($currentCart as $cart) {
+            $products[] = [
+                'product' => Product::find($cart['product_id']),
+                'count' => $cart['count']
+            ];
         }
 
-        $product = Product::findOrFail($productId);
-
         return view('checkout_form', [
-            'product' => $product
+            'products' => $products
         ]);
     }
 

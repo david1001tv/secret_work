@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="buy-btn">
-                                <img src="{{ asset('images/buy.png') }}" alt="buy" class="img-buy">
+                                <a href="{{ route('add_to_cart', ['product_id' => $product->id]) }}"><img src="{{ asset('images/buy.png') }}" alt="buy" class="img-buy"></a>
                             </div>
                         </div>
                     </div>
