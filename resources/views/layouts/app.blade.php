@@ -131,7 +131,7 @@
                     <img src="{{ asset('images/shopping-cart.png') }}" alt="cart">
                    </a>
                     @if (Auth::check())
-                        <span id="cartCount">{{ $cartCount ?? 0 }}</span>
+                        <span id="cartCount">{{ count(Cache::get('user_cart_' . Auth::user()->id) ?? []) }}</span>
                     @endif
                 </div>
             </div>

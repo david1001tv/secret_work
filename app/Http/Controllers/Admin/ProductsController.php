@@ -46,8 +46,8 @@ class ProductsController extends Controller
         foreach($data['characteristics'][$product->category_id] as $characteristic) {
             Characteristic::create([
                 'product_id' => $product->id,
-                'type_id' => $product->category_id,
-                'value' => $characteristic
+                'type_id' => $characteristic['type'],
+                'value' => $characteristic['value']
             ]);
         }
 
@@ -86,9 +86,9 @@ class ProductsController extends Controller
         foreach($data['characteristics'] as $characteristic) {
             Characteristic::where([
                 'product_id' => $product->id,
-                'type_id' => $product->category_id,
+                'type_id' => $characteristic['type'],
             ])->update([
-                'value' => $characteristic
+                'value' => $characteristic['value']
             ]);
         }
 

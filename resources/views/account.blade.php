@@ -52,16 +52,12 @@
                 <thead>
                     <th scope="col">#</th>
                     <th scope="col">Cost, $</th>
-                    <th scope="col">Product name</th>
-                    <th scope="col">Count</th>
                     <th scope="col">Status</th>
                 </thead>
                 @foreach($orders as $order)
                     <tr>
                         <td>{{ $order->id }}</td>
                         <td>{{ $order->cost }}</td>
-                        <td>{{ $order->product->name }}</td>
-                        <td>{{ $order->count }}</td>
                         <td>{{ $order->status->name }}</td>
                     </tr>
                 @endforeach

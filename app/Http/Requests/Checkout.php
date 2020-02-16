@@ -24,8 +24,7 @@ class Checkout extends FormRequest
     public function rules()
     {
         return [
-            'product' => 'required|numeric|exists:products,id',
-            'count' => 'required|numeric|min:1|max:100'
+            'products' => 'required|array',
         ];
     }
 }

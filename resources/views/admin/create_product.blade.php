@@ -50,7 +50,10 @@
                                 <div class="form-group col-md-6 category-{{ $category->id }}">
                                     <label for="{{ $categoryType->name }}">{{ $categoryType->name }}:</label>
                                     <input id="{{ $categoryType->name }}" class="form-control category-{{ $category->id }}"
-                                           type="text" name="characteristics[{{ $category->id }}][]" required
+                                           type="text" name="characteristics[{{ $category->id }}][{{$categoryType->id}}][value]" required
+                                    >
+                                    <input id="{{ $categoryType->name }}" class="form-control category-{{ $category->id }}"
+                                           type="text" name="characteristics[{{ $category->id }}][{{$categoryType->id}}][type]" value="{{ $categoryType->id }}" hidden
                                     >
                                 </div>
                             @endforeach

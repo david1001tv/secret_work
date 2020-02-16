@@ -12,7 +12,7 @@ class Characteristic extends Model
 
     public function type()
     {
-        return $this->belongsTo(CharacteristicType::class);
+        return $this->belongsTo(CharacteristicType::class, 'type_id');
     }
 
     public function product()

@@ -21,15 +21,9 @@ class HomeController extends Controller
             $products = Product::where('category_id', $category)->get();
         }
 
-        $user = Auth::user();
-        if ($user) {
-            $currentCart = Cache::get('user_cart_' . $user->id);
-        }
-
         return view('index', [
             'products' => $products,
             'categories' => $categories,
-            'cartCount' => isset($currentCart) ? count($currentCart) : 0
         ]);
     }
 
