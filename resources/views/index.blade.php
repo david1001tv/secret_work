@@ -13,7 +13,7 @@
         <div class="filter">
             <!-- categoty -->
             <div class="title">
-                <p>Filter by</p>
+                <p>Filter by category</p>
             </div>
             <ul>
                 @foreach($categories as $category)
