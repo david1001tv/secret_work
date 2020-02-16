@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Dashboard\UpdateMe as UpdateMeRequest;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -27,9 +27,18 @@ class DashboardController extends Controller
     }
 
     //TODO: make update my data request
-    public function update()
+    public function update(UpdateMeRequest $request)
     {
+        $data = $request->validated();
+        $user = Auth::user();
 
+        $user->update([
+            'name' => $data['name'],
+            'phone' => $data['phone'],
+            'address' => $data['address']
+        ]);
+
+        return redirect('dashboard/me');
     }
 
     public function orders()
