@@ -103,11 +103,34 @@
             </div>
             <div class="user-panel">
                 <div class="user-menu">
-                    <img src="{{ asset('images/user.png') }}" alt="user">
+                    @if (Auth::check())
+                                @if (Auth::user()->role->name !== 'client')
+                                    <a href="{{ route('admin.panel') }}">Admin panel</a>
+                                @endif
+                                <a href="">
+                                    Account
+                                </a>
+                                <div class="exit"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                                >
+                                    Logout
+                                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                    @else
+                        <a href="/login">Login</a>
+                        <a href="/register">Register</a>
+                    @endif
                 </div>
                 <div class="cart">
+                   <a href="{{ route('make_order_form') }}">
                     <img src="{{ asset('images/shopping-cart.png') }}" alt="cart">
-                    <span id="cartCount">{{ $cartCount }}</span>
+                   </a>
+                    @if (Auth::check())
+                        <span id="cartCount">{{ $cartCount ?? 0 }}</span>
+                    @endif
                 </div>
             </div>
         </div>
