@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\CreateProduct as CreateProductRequest;
+use App\Http\Requests\Admin\UpdateProduct as UpdateProductRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Characteristic;
@@ -14,7 +15,7 @@ class ProductsController extends Controller
     public function listView()
     {
         $products = Product::all();
-        //TODO: add return view with list of products
+
         return view('admin.products_list', [
             'products' => $products
         ]);
@@ -51,22 +52,43 @@ class ProductsController extends Controller
             ]);
         }
 
-        $products = Product::all();
-
-        return view('admin.products_list', [
-            'products' => $products
-        ]);
+        return redirect('admin/products');;
     }
 
     public function updateForm($id)
     {
-        $product = Product::find($id);
-        //TODO: add return view update form with selected product or 404 error page
-        return true;
+        $product = Product::findOrFail($id);
+        
+        return view('admin.update_product', [
+            'product' => $product
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
+        $data = $request->validated();
+        $product = Product::findOrFail($id);
+        
+        if (!empty($request->image)) {
+            $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        } else {
+            $imageName = null;
+        }
+        
+        $product->update([
+            'name' => $data['name'] ?? $product->name,
+            'description' => $data['description'] ?? $product->description,
+            'image' => $imageName ?? $product->image,
+            'cost' => $data['cost'] ?? $product->cost
+        ]);
 
+        foreach($data['characteristics'][$product->category_id] as $characteristic) {
+            Characteristic::where([
+                'product_id' => $product->id,
+                'type_id' => $product->category_id,
+            ])->update([
+                'value' => $characteristic
+            ]);
+        }
     }
 }

@@ -30,11 +30,13 @@ Route::prefix('dashboard')->group(function () {
 });
 
 Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::get('/', 'Admin\ProductsController@listView')->name('admin.panel');
+    Route::get('/', 'Admin\HomeController@index')->name('admin.panel');
 
-    Route::get('/products', 'Admin\ProductsController@listView')->name('admin.products_list');
-    Route::get('/products/create/form', 'Admin\ProductsController@createForm')->name('admin.create_products_form');
-    Route::get('/products/update/form/{id}', 'Admin\ProductsController@updateForm')->name('admin.update_products_form');
-    Route::post('/products/create/', 'Admin\ProductsController@create')->name('admin.products_create');
-    Route::post('/products/update/', 'Admin\ProductsController@update')->name('admin.products_update');
+    Route::prefix('products')->group(function () {
+        Route::get('/', 'Admin\ProductsController@listView')->name('admin.products_list');
+        Route::get('/create/form', 'Admin\ProductsController@createForm')->name('admin.create_products_form');
+        Route::get('/update/form/{id}', 'Admin\ProductsController@updateForm')->name('admin.update_products_form');
+        Route::post('/create', 'Admin\ProductsController@create')->name('admin.products_create');
+        Route::post('/update', 'Admin\ProductsController@update')->name('admin.products_update');
+    });
 });
