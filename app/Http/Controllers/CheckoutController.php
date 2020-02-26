@@ -116,6 +116,6 @@ class CheckoutController extends Controller
         }
         Cache::forget('user_cart_' . $user->id);
 
-        return redirect('dashboard/orders');
+        return redirect('dashboard/me');
     }
 }
