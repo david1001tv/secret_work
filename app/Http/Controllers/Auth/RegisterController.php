@@ -58,7 +58,7 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        $roleId = Role::where('name', 'client')->value();
+        $roleId = Role::where('name', 'client')->value('id');
 
         return User::create([
             'name' => $data['name'],
