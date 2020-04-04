@@ -13,12 +13,17 @@ class HomeController extends Controller
     public function show(Request $request)
     {
         $category = $request->input('category');
+        $search = $request->input('search');
         $categories = ProductCategory::all();
 
         if (empty($category)) {
             $products = Product::all();
         } else {
             $products = Product::where('category_id', $category)->get();
+        }
+
+        if (!empty($search)) {
+            $products = $products->where('name', $search);
         }
 
         return view('index', [

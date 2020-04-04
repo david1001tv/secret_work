@@ -18,6 +18,7 @@
                 @endforeach
             </div>
         </div>
+        <a class="btn btn-primary" style="margin-bottom: 20px; " href="{{ route('home') }}">Clear filters</a>
         @if (count($products))
             <div class="row justify-content-center">
                 @foreach($products as $product)

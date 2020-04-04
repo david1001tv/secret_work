@@ -73,8 +73,8 @@
                         @endif
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-md-0">
-                    <input class="form-control" type="text" placeholder="Search">
+                <form class="form-inline my-2 my-md-0" action="{{ route('home') }}" method="GET">
+                    <input class="form-control" name="search" type="text" placeholder="Search">
                 </form>
             </div>
         </div>
