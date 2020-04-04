@@ -65,6 +65,11 @@
                         </li>
                     @endif
                     <li class="nav-item nav-item-header">
+                        <a class="nav-link" href="{{ route('about_us') }}">
+                            About Us
+                        </a>
+                    </li>
+                    <li class="nav-item nav-item-header">
                         <a class="nav-link" href="{{ route('make_order_form') }}">
                             <img src="{{ asset('images/shopping-cart.png') }}" alt="cart">
                         </a>

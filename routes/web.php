@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', 'HomeController@show')->name('home');
+Route::get('/about-us', 'HomeController@aboutUs')->name('about_us');
 Route::get('/product/{id}', 'HomeController@showProduct')->name('product.show');
 
 Route::get('/add-to-cart', 'CheckoutController@addToCart')->name('add_to_cart')->middleware('auth');
