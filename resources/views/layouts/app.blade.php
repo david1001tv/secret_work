@@ -42,14 +42,14 @@
                 <ul class="navbar-nav mr-auto">
                     @if (Auth::check())
                         @if (Auth::user()->role->name !== 'client')
-                            <li class="nav-item">
+                            <li class="nav-item nav-item-header">
                                 <a class="nav-link" href="{{ route('admin.panel') }}">Admin panel</a>
                             </li>
                         @endif
-                        <li class="nav-item">
+                        <li class="nav-item nav-item-header">
                             <a class="nav-link" href="{{ route('dashboard-me') }}">Account</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item nav-item-header">
                             <a class="nav-link"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -57,14 +57,14 @@
                             </form>
                         </li>
                     @else
-                        <li class="nav-item">
+                        <li class="nav-item nav-item-header">
                             <a class="nav-link" href="/login">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item nav-item-header">
                             <a class="nav-link" href="/register">Register</a>
                         </li>
                     @endif
-                    <li class="nav-item">
+                    <li class="nav-item nav-item-header">
                         <a class="nav-link" href="{{ route('make_order_form') }}">
                             <img src="{{ asset('images/shopping-cart.png') }}" alt="cart">
                         </a>

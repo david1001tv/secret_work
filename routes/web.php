@@ -20,6 +20,7 @@ Route::get('/', 'HomeController@show')->name('home');
 Route::get('/product/{id}', 'HomeController@showProduct')->name('product.show');
 
 Route::get('/add-to-cart', 'CheckoutController@addToCart')->name('add_to_cart')->middleware('auth');
+Route::get('/clear-cart', 'CheckoutController@clearCart')->name('clear_cart')->middleware('auth');
 Route::get('/checkout', 'CheckoutController@form')->name('make_order_form')->middleware('auth');
 Route::post('/checkout', 'CheckoutController@makeOrder')->name('make_order')->middleware('auth');
 

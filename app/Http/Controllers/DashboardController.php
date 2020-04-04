@@ -30,7 +30,6 @@ class DashboardController extends Controller
         ]);
     }
 
-    //TODO: make update my data request
     public function update(UpdateMeRequest $request)
     {
         $data = $request->validated();
@@ -51,9 +50,8 @@ class DashboardController extends Controller
         $order = Order::findOrFail($id);
 
         if ($user->id !== $order->user_id) {
-            abort(403, 'Its not your order');
+            abort(403, "It's not your order");
         }
-
         $order->load('carts');
 
         return view('dashboard.order_details', [

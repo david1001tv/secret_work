@@ -33,6 +33,7 @@
                 </tbody>
             </table>
             <input type="submit" class="btn btn-primary" value="Make order">
+            <a class="btn btn-secondary" href="{{ route('clear_cart') }}">Clear cart</a>
         </form>
     </div>
 

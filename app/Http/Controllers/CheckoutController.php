@@ -118,4 +118,12 @@ class CheckoutController extends Controller
 
         return redirect('dashboard/me');
     }
+
+    public function clearCart()
+    {
+        $user = Auth::user();
+        Cache::forget('user_cart_' . $user->id);
+
+        return redirect('/');
+    }
 }
