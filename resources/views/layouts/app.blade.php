@@ -19,7 +19,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap&subset=cyrillic"
+          rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -27,145 +28,84 @@
         crossorigin="anonymous"></script>
 </head>
 <body>
-    {{-- <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div id="navbarContainer" class="container">
+            <a class="navbar-brand" href="{{ route('home') }}" style="font-family: VT323; font-size: 40px;">PCShop</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04"
+                    aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
+            <div class="collapse navbar-collapse" id="navbarsExample04">
+                <ul class="navbar-nav mr-auto">
+                    @if (Auth::check())
+                        @if (Auth::user()->role->name !== 'client')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('admin.panel') }}">Admin panel</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            @if (Auth::user()->role->name !== 'client')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.panel') }}">Admin panel</a>
-                                </li>
-                            @endif
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav> --}}
-
-    <header class="header">
-        <div class="container-menu">
-            <div class="btn-menu">
-{{--                <img src="{{ asset('images/menu.png') }}" alt="menu">--}}
-                <div class="site-logo">
-                    <a href="{{ route('home') }}">PCShop</a>
-                </div>
-            </div>
-                @if ($isSearch)
-                    <div class="search-panel">
-                        <form action="">
-                            <div class="search">
-                                <img src="{{ asset('images/search.png') }}" alt="search">
-                                <input type="text" name="search-request" required>
-                                <input type="submit" value="Search">
-                            </div>
-                        </form>
-                    </div>
-                @endif
-            <div class="user-panel">
-                <div class="user-menu">
-                    @if (Auth::check())
-                                @if (Auth::user()->role->name !== 'client')
-                                    <a href="{{ route('admin.panel') }}">Admin panel</a>
-                                @endif
-                                <a href="{{ route('dashboard-me') }}">
-                                    Account
-                                </a>
-                                <div class="exit"
-                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"
-                                >
-                                    Logout
-                                </div>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
+                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard-me') }}">Account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
                     @else
-                        <a href="/login">Login</a>
-                        <a href="/register">Register</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>
                     @endif
-                </div>
-                <div class="cart">
-                   <a href="{{ route('make_order_form') }}">
-                    <img src="{{ asset('images/shopping-cart.png') }}" alt="cart">
-                   </a>
-                    @if (Auth::check())
-                        <span id="cartCount">{{ count(Cache::get('user_cart_' . Auth::user()->id) ?? []) }}</span>
-                    @endif
-                </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('make_order_form') }}">
+                            <img src="{{ asset('images/shopping-cart.png') }}" alt="cart">
+                        </a>
+                        @if (Auth::check())
+                            <span id="cartCount">{{ count(Cache::get('user_cart_' . Auth::user()->id) ?? []) }}</span>
+                        @endif
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-md-0">
+                    <input class="form-control" type="text" placeholder="Search">
+                </form>
             </div>
         </div>
-    </header>
+    </nav>
+</header>
 
 
-    <main class="main">
-        @yield('content')
-    </main>
+<main class="main">
+    @yield('content')
+</main>
 
-    <footer class="footer">
-        <div class="container-menu">
-            <div class="site-logo">
-                <p>pcshop</p>
-            </div>
-            <div class="copyright">
-                © 2020 - Ecommerce software
-            </div>
-            <div class="social-links">
-                <div class="soc-item">
-                    <a href="#">
-                        <img src="{{ asset('images/doge.png') }}" alt="doge">
-                    </a>
-                    <a href="#">
-                        <img src="{{ asset('images/twitter.png') }}" alt="twitter">
-                    </a>
-                    <a href="#">
-                        <img src="{{ asset('images/facebook.png') }}" alt="facebook">
-                    </a>
-                </div>
+<footer class="footer">
+    <div class="container-menu">
+        <div class="site-logo">
+            <p>pcshop</p>
+        </div>
+        <div>
+            <a href="mailto:Pcshopinfo7@gmail.com">Write to us</a>
+        </div>
+        <div class="social-links">
+            <div class="soc-item">
+                <a href="#">
+                    <img src="{{ asset('images/twitter.png') }}" alt="twitter">
+                </a>
+                <a href="#">
+                    <img src="{{ asset('images/facebook.png') }}" alt="facebook">
+                </a>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
 </body>
 </html>

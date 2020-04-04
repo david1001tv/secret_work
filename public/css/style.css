@@ -384,15 +384,6 @@ textarea {
     padding: 0 15px;
     max-width: 1170px;
     margin: 0 auto;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
 }
 
 .container-no-flex {
@@ -415,7 +406,7 @@ footer.footer .site-logo p, .site-logo a {
     font-family: VT323;
     font-style: normal;
     font-weight: normal;
-    font-size: 50px;
+    font-size: 40px;
     line-height: 50px;
     text-decoration: none;
     color: black;
@@ -929,8 +920,8 @@ main.main-admin .container .links a .admin-link .count-el {
     height: 20px;
     width: 20px;
     position: relative;
-    top: -40px;
-    right: -25px;
+    top: -55px;
+    right: -45px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -939,5 +930,15 @@ main.main-admin .container .links a .admin-link .count-el {
 }
 
 form.form-user {
-    width: 400px;
+    max-width: 400px;
+}
+
+.nav-item {
+    margin: auto;
+}
+
+@media(max-width: 1200px) {
+    #navbarContainer {
+        padding: 0 !important;
+    }
 }

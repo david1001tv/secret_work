@@ -1,7 +1,7 @@
 @extends('layouts.app', ['isSearch' => false])
 @section('title', 'Update order #' . $order->id)
 @section('content')
-    <div class="container center p-40">
+    <div class="container left p-40">
 
         @if (count($errors) > 0)
             <div class="col-md-8">
@@ -34,7 +34,8 @@
                     <select id="inputStatus" class="form-control" name="status">
                         @foreach($statuses as $status)
                             @if ($status->id === $order->status_id)
-                                <option id="{{$status->id}}" value="{{ $status->id }}" selected>{{ $status->name }}</option>
+                                <option id="{{$status->id}}" value="{{ $status->id }}"
+                                        selected>{{ $status->name }}</option>
                             @else
                                 <option id="{{$status->id}}" value="{{ $status->id }}">{{ $status->name }}</option>
                             @endif

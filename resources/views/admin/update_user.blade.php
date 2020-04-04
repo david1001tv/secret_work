@@ -1,10 +1,10 @@
 @extends('layouts.app', ['isSearch' => false])
 @section('title', $user->name)
 @section('content')
-    <div class="container center p-40">
-
+    <div class="container left p-40">
+        <div class="row justify-content-left">
+            <div class="col-md-8">
                 @if (count($errors) > 0)
-                <div class="col-md-8">
                     <div class="alert alert-danger">
                         <strong>Whoops!</strong> There were some problems with your input.
                         <ul>
@@ -13,8 +13,8 @@
                             @endforeach
                         </ul>
                     </div>
-                </div>
                 @endif
+            </div>
             <div class="col-md-8">
                 <form method="POST" action="{{ route('admin.users_update', ['id' => $user->id]) }}">
                     <div class="form-row">
@@ -25,12 +25,14 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPhone">Phone</label>
-                            <input type="text" class="form-control" id="inputPhone" name="phone" value="{{ $user->phone }}">
+                            <input type="text" class="form-control" id="inputPhone" name="phone"
+                                   value="{{ $user->phone }}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" name="address" value="{{ $user->address }}">
+                        <input type="text" class="form-control" id="inputAddress" name="address"
+                               value="{{ $user->address }}">
                     </div>
 
                     <div class="form-group">
@@ -38,7 +40,8 @@
                         <select id="inputRole" class="form-control" name="role">
                             @foreach($roles as $role)
                                 @if ($role->id === $user->role_id)
-                                    <option id="{{$role->id}}" value="{{ $role->id }}" selected>{{ $role->name }}</option>
+                                    <option id="{{$role->id}}" value="{{ $role->id }}"
+                                            selected>{{ $role->name }}</option>
                                 @else
                                     <option id="{{$role->id}}" value="{{ $role->id }}">{{ $role->name }}</option>
                                 @endif
@@ -51,5 +54,6 @@
                        aria-pressed="true">Cancel</a>
                 </form>
             </div>
+        </div>
     </div>
 @endsection

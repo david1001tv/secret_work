@@ -7,7 +7,7 @@
 
     <div class="container-no-flex">
         <form method="POST" action="{{ route('make_order') }}">
-            <table class="table">
+            <table class="table" style="max-width: 360px;">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -26,7 +26,7 @@
                             <td>{{ $product['product']->name }}</td>
                             <td>${{ $product['product']->cost }}</td>
                             <td>
-                                <input type="number" value="{{ $product['count'] }}" name="products[{{$key}}][count]">
+                                <input type="number" min="1" value="{{ $product['count'] }}" name="products[{{$key}}][count]">
                             </td>
                         </tr>
                     @endforeach

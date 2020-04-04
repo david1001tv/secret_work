@@ -2,7 +2,7 @@
 @section('title', 'Login')
 @section('content')
 <div class="container center p-40">
-        <div class="col-md-6">
+        <div class="col-md-6" style="margin: auto;">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
