@@ -40,4 +40,14 @@ class OrdersController extends Controller
 
         return redirect('admin/orders/update/form/' . $id);
     }
+
+    public function orderDetails($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->load('carts');
+
+        return view('admin.order_details', [
+            'order' => $order
+        ]);
+    }
 }

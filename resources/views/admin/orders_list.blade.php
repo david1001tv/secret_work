@@ -17,7 +17,7 @@
             <tbody>
             @foreach($orders as $order)
                 <tr>
-                    <th scope="row">{{ $order->id }}</th>
+                    <th scope="row"><a href="{{ route('admin.order_details', ['id' => $order->id]) }}">{{ $order->id }}</a></th>
                     <td>{{ $order->cost }}</td>
                     <td>{{ $order->user->name }}</td>
                     <td>{{ $order->user->email }}</td>

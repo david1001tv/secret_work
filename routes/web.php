@@ -28,6 +28,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/me', 'DashboardController@me')->name('dashboard-me');
     Route::post('/me', 'DashboardController@update')->name('dashboard-update-me');
     Route::get('/orders', 'DashboardController@orders')->name('dashboard-my-orders');
+    Route::get('/order/{id}', 'DashboardController@orderDetails')->name('dashboard.order_details');
 });
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
@@ -51,6 +52,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
     Route::prefix('orders')->group(function () {
         Route::get('/', 'Admin\OrdersController@listView')->name('admin.orders_list');
+        Route::get('/{id}', 'Admin\OrdersController@orderDetails')->name('admin.order_details');
         Route::get('/update/form/{id}', 'Admin\OrdersController@updateForm')->name('admin.update_orders_form');
         Route::post('/update/{id}', 'Admin\OrdersController@update')->name('admin.orders_update');
     });

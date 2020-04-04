@@ -56,7 +56,7 @@
                 </thead>
                 @foreach($orders as $order)
                     <tr>
-                        <td>{{ $order->id }}</td>
+                        <td><a href="{{ route('dashboard.order_details', ['id' => $order->id]) }}">{{ $order->id }}</a></td>
                         <td>{{ $order->cost }}</td>
                         <td>{{ $order->status->name }}</td>
                     </tr>

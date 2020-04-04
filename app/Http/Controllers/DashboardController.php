@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Dashboard\UpdateMe as UpdateMeRequest;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -44,12 +45,19 @@ class DashboardController extends Controller
         return redirect('dashboard/me');
     }
 
-    // public function orders()
-    // {
-    //     $user = Auth::user();
-    //     $userOrders = $user->orders()->get();
+    public function orderDetails($id)
+    {
+        $user = Auth::user();
+        $order = Order::findOrFail($id);
 
-    //     //TODO: return view with prepared data
-    //     return $userOrders;
-    // }
+        if ($user->id !== $order->user_id) {
+            abort(403, 'Its not your order');
+        }
+
+        $order->load('carts');
+
+        return view('dashboard.order_details', [
+            'order' => $order
+        ]);
+    }
 }
