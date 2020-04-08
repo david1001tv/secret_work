@@ -26,7 +26,11 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->cost }}</td>
                     <td>{{ $product->category->name }}</td>
-                    <td><a href="{{ route('admin.update_products_form', ['id' => $product->id]) }}">Edit</a></td>
+                    <td>
+                        <a href="{{ route('admin.update_products_form', ['id' => $product->id]) }}">Edit</a>
+                        |
+                        <a href="{{ route('admin.products_delete', ['id' => $product->id]) }}">Delete</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

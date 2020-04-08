@@ -70,6 +70,16 @@
                         </a>
                     </li>
                     <li class="nav-item nav-item-header">
+                        <a class="nav-link" href="{{ route('delivery_and_payments') }}">
+                            Deliveries and Payments
+                        </a>
+                    </li>
+                    <li class="nav-item nav-item-header">
+                        <a class="nav-link" href="{{ route('contacts') }}">
+                            Contacts
+                        </a>
+                    </li>
+                    <li class="nav-item nav-item-header">
                         <a class="nav-link" href="{{ route('make_order_form') }}">
                             <img src="{{ asset('images/shopping-cart.png') }}" alt="cart">
                         </a>
@@ -98,16 +108,6 @@
         </div>
         <div>
             <a href="mailto:Pcshopinfo7@gmail.com">Write to us</a>
-        </div>
-        <div class="social-links">
-            <div class="soc-item">
-                <a href="#">
-                    <img src="{{ asset('images/twitter.png') }}" alt="twitter">
-                </a>
-                <a href="#">
-                    <img src="{{ asset('images/facebook.png') }}" alt="facebook">
-                </a>
-            </div>
         </div>
     </div>
 </footer>

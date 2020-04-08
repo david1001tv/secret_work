@@ -49,11 +49,14 @@
                         <p class="h3">{{ $product->category->name }}</p>
                     </div>
                     <div class="form-row">
-                        @foreach($product->characteristics as $characteristic)
+                        @foreach($product->characteristics as $key => $characteristic)
                             <div class="form-group col-md-6">
                                 <label for="{{ $characteristic->type->name }}">{{ $characteristic->type->name }}:</label>
                                 <input id="{{ $characteristic->type->name }}" class="form-control"
-                                       type="text" name="characteristics[]" value="{{ $characteristic->value }}" required
+                                       type="text" name="characteristics[{{$key}}][value]" value="{{ $characteristic->value }}" required
+                                >
+                                <input id="{{ $characteristic->type->id }}" class="form-control"
+                                       type="hidden" name="characteristics[{{$key}}][type]" value="{{ $characteristic->value }}" required
                                 >
                             </div>
                         @endforeach

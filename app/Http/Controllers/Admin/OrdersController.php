@@ -50,4 +50,13 @@ class OrdersController extends Controller
             'order' => $order
         ]);
     }
+
+    public function orderDelete($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->carts()->delete();
+        $order->delete();
+
+        return redirect('admin/orders');
+    }
 }

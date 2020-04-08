@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\DeliveryType;
 use App\Models\Order;
 use App\Models\Product;
 use App\Http\Requests\Checkout as CheckoutRequest;
@@ -79,15 +80,20 @@ class CheckoutController extends Controller
         if (empty($products)) {
             return redirect('/');
         }
+        $deliveryTypes = DeliveryType::all();
 
         return view('checkout', [
-            'products' => $products
+            'products' => $products,
+            'deliveryTypes' => $deliveryTypes,
+            'user' => $user
         ]);
     }
 
     public function makeOrder(CheckoutRequest $request)
     {
         $data = $request->validated();
+        $deliveryType = (int)$data['delivery_type'];
+        $deliveryAddress = $data['delivery_address'];
         $user = Auth::user();
         $statusId = Status::where('key', 'new')->value('id');
         $cart = [];
@@ -104,7 +110,9 @@ class CheckoutController extends Controller
         $order = Order::create([
             'cost' => $totalCost,
             'user_id' => $user->id,
-            'status_id' => $statusId
+            'status_id' => $statusId,
+            'delivery_type_id' => $deliveryType,
+            'delivery_address' => $deliveryAddress
         ]);
 
         foreach ($cart as $item) {

@@ -52,7 +52,7 @@ class DashboardController extends Controller
         if ($user->id !== $order->user_id) {
             abort(403, "It's not your order");
         }
-        $order->load('carts');
+        $order->load(['carts', 'deliveryType']);
 
         return view('dashboard.order_details', [
             'order' => $order

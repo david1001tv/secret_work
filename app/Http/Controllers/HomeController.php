@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeliveryType;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
@@ -46,5 +47,19 @@ class HomeController extends Controller
     public function aboutUs()
     {
         return view('about_us');
+    }
+
+    public function deliveriesAndPayments()
+    {
+        $deliveryTypes = DeliveryType::all();
+
+        return view('delivery_and_payment', [
+            'deliveryTypes' => $deliveryTypes
+        ]);
+    }
+
+    public function contacts()
+    {
+        return view('contacts');
     }
 }

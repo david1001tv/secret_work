@@ -19,6 +19,8 @@ Auth::routes();
 Route::get('/', 'HomeController@show')->name('home');
 Route::get('/about-us', 'HomeController@aboutUs')->name('about_us');
 Route::get('/product/{id}', 'HomeController@showProduct')->name('product.show');
+Route::get('/delivery-types', 'HomeController@deliveriesAndPayments')->name('delivery_and_payments');
+Route::get('/contacts', 'HomeController@contacts')->name('contacts');
 
 Route::get('/add-to-cart', 'CheckoutController@addToCart')->name('add_to_cart')->middleware('auth');
 Route::get('/clear-cart', 'CheckoutController@clearCart')->name('clear_cart')->middleware('auth');
@@ -42,6 +44,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::post('/create', 'Admin\ProductsController@create')->name('admin.products_create');
         Route::get('/update/form/{id}', 'Admin\ProductsController@updateForm')->name('admin.update_products_form');
         Route::post('/update/{id}', 'Admin\ProductsController@update')->name('admin.products_update');
+        Route::get('/delete/{id}', 'Admin\ProductsController@delete')->name('admin.products_delete');
     });
 
     Route::prefix('users')->group(function () {
@@ -55,6 +58,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::prefix('orders')->group(function () {
         Route::get('/', 'Admin\OrdersController@listView')->name('admin.orders_list');
         Route::get('/{id}', 'Admin\OrdersController@orderDetails')->name('admin.order_details');
+        Route::get('/delete/{id}', 'Admin\OrdersController@orderDelete')->name('admin.order_delete');
         Route::get('/update/form/{id}', 'Admin\OrdersController@updateForm')->name('admin.update_orders_form');
         Route::post('/update/{id}', 'Admin\OrdersController@update')->name('admin.orders_update');
     });

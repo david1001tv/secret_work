@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = 'orders';
-    protected $fillable = ['user_id', 'status_id', 'cost'];
+    protected $fillable = ['user_id', 'status_id', 'cost', 'delivery_type_id', 'delivery_address'];
     protected $hidden = ['updated_at'];
 
     public function user()
@@ -23,5 +23,10 @@ class Order extends Model
     public function carts()
     {
         return $this->hasMany(Cart::class);
+    }
+
+    public function deliveryType()
+    {
+        return $this->belongsTo(DeliveryType::class);
     }
 }

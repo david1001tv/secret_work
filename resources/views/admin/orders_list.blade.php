@@ -23,7 +23,13 @@
                     <td>{{ $order->user->email }}</td>
                     <td>{{ $order->user->phone }}</td>
                     <td>{{ $order->status->name }}</td>
-                    <td><a href="{{ route('admin.update_orders_form', ['id' => $order->id]) }}">Edit</a></td>
+                    <td>
+                        <a href="{{ route('admin.update_orders_form', ['id' => $order->id]) }}">Edit</a>
+                        |
+                        <a href="{{ route('admin.order_details', ['id' => $order->id]) }}">Details</a>
+                        |
+                        <a href="{{ route('admin.order_delete', ['id' => $order->id]) }}">Delete</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

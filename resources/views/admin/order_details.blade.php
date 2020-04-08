@@ -13,14 +13,21 @@
             <tbody>
             @foreach($order->carts as $cart)
                 <tr>
-                    <td><a href="{{ route('admin.update_products_form', ['id' => $cart->product->id]) }}">{{ $cart->product->name }}</a></td>
-                    <td>{{ $cart->product->cost }}</td>
+                    <td>
+                        @if(isset($cart->product))
+                            <a href="{{ route('admin.update_products_form', ['id' => $cart->product->id]) }}">{{ $cart->product->name ?? 'Deleted' }}</a>
+                        @else
+                            <span>Deleted</span>
+                        @endif
+                    </td>
+                    <td>{{ $cart->product->cost ?? 'Deleted' }}</td>
                     <td>{{ $cart->count }}</td>
                 </tr>
             @endforeach
             </tbody>
         </table>
         <p class="h3">Total price: {{ $order->cost }}</p>
+        <span class="h5">Delivery</span>: <span>{{ $order->deliveryType->name }}, {{ $order->delivery_address }}</span><br/>
         <a href="{{ route('admin.orders_list') }}" class="btn btn-secondary active" role="button"
            aria-pressed="true">Back</a>
     </div>

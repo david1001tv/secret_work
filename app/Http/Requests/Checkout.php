@@ -25,6 +25,8 @@ class Checkout extends FormRequest
     {
         return [
             'products' => 'required|array',
+            'delivery_type' => 'required|exists:delivery_types,id',
+            'delivery_address' => 'required|string'
         ];
     }
 }

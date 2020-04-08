@@ -94,4 +94,13 @@ class ProductsController extends Controller
 
         return redirect('admin/products/update/form/' . $id);
     }
+
+    public function delete($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->characteristics()->delete();
+        $product->delete();
+
+        return redirect('admin/products');
+    }
 }
