@@ -56,7 +56,7 @@
                                        type="text" name="characteristics[{{$key}}][value]" value="{{ $characteristic->value }}" required
                                 >
                                 <input id="{{ $characteristic->type->id }}" class="form-control"
-                                       type="hidden" name="characteristics[{{$key}}][type]" value="{{ $characteristic->value }}" required
+                                       type="hidden" name="characteristics[{{$key}}][type]" value="{{ $characteristic->type->id }}" required
                                 >
                             </div>
                         @endforeach
