@@ -18,7 +18,7 @@
                 </thead>
                 <tbody>
                     @foreach($products as $key => $product)
-                        <tr>
+                        <tr class="productRow">
                             <th scope="row">
                                 {{ $product['product']->id }}
                                 <input type="number" value="{{ $product['product']->id }}" hidden name="products[{{$key}}][id]">
@@ -26,7 +26,7 @@
                             <td>{{ $product['product']->name }}</td>
                             <td>${{ $product['product']->cost }}</td>
                             <td>
-                                <input type="number" min="1" value="{{ $product['count'] }}" name="products[{{$key}}][count]">
+                                <input class="productCount" type="number" min="1" data-cost="{{ $product['product']->cost }}" value="{{ $product['count'] }}" name="products[{{$key}}][count]">
                             </td>
                         </tr>
                     @endforeach
@@ -38,6 +38,10 @@
                     <option value="{{ $deliveryType->id }}">{{ $deliveryType->name }}</option>
                 @endforeach
             </select>
+            <br/>
+            <p class="h4">
+                Total cost: <span id="totalCost"></span>
+            </p>
             <br/>
             <label for="deliveryAddress">Delivery type</label><br/>
             <input id="deliveryAddress" style="margin-bottom: 20px; width: 360px" type="text" value="{{ $user->address }}" name="delivery_address" required><br/>
@@ -90,4 +94,25 @@
         </form>
     </div>
 
+    <script>
+        function updateTotalCost() {
+            const products = $('.productCount');
+            const totalCost = $('#totalCost');
+            let cost = 0;
+
+            for (let key in products) {
+                if (typeof products[key] === 'object' && products[key].value) {
+                    cost += products[key].value * products[key].dataset.cost;
+                }
+            }
+            totalCost.html(`$ ${cost}`);
+        }
+
+        $(document).ready(() => {
+            updateTotalCost();
+            $('.productCount').change(() => {
+                updateTotalCost();
+            });
+        });
+    </script>
 @endsection
