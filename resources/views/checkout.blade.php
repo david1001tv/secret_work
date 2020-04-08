@@ -48,7 +48,7 @@
             </div>
             <div class="form-group CVV" style="width: 360px">
                 <label for="cvv">CVV</label>
-                <input type="text" class="form-control" id="cvv" required>
+                <input type="password" class="form-control" id="cvv" required>
             </div>
             <div class="form-group" id="card-number-field" style="width: 360px">
                 <label for="cardNumber">Card Number</label>
