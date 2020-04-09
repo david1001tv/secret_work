@@ -16,17 +16,6 @@ class User extends Authenticatable
 
     protected $fillable = ['email', 'password', 'phone', 'name', 'address', 'role_id'];
 
-    /**
-     * Set the user's password with hashing
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = Hash::make($value);
-    }
-
     public function role()
     {
         return $this->belongsTo(Role::class);
